@@ -78,3 +78,25 @@ function getCurrentForecast () {
   
       console.log(response)
       $('#forecast').empty();
+
+    // variable to hold response.list
+    let results = response.list;
+    console.log(results)
+
+    //declare start date to check against
+    // for loop
+
+    for (let i = 0; i < results.length; i++) {
+
+        let day = Number(results[i].dt_txt.split('-')[2].split(' ')[0]);
+        let hour = results[i].dt_txt.split('-')[2].split(' ')[1];
+        console.log(day);
+        console.log(hour);
+  
+        if(results[i].dt_txt.indexOf("12:00:00") !== -1){
+
+    // temperature converting to fahrenheit 
+    var temp = (results[i].main.temp - 273.15) * 1.80 + 32;
+    var tempF = Math.floor(temp);
+
+    
