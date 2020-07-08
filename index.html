@@ -17,41 +17,34 @@
   </head>
   <body>
     <!--Header: with the heating-->
-    <header class="bg-dark pb-2">
+    <header class="bg-dark pt-2 pb-2">
       <div class="container">
         <h1 class="text-center text-white">Weather Dashboard</h1>
       </div>
     </header>
     <!--Aside : container with form and a button-->
-    <aside class="container-sm">
+
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-3 bg-light pt-3 pb-3">
+        <aside class="col-lg-3 bg-light pt-3 pb-3">
           <h5>Search for a City:</h5>
           <div class="input-group mb-3">
-            <input
-              id="searchTerm"
-              type="text"
-              class="form-control"
-              placeholder="City name..."
-              class="input-group-append"
-            />
-            <button
-              id="searchBtn"
-              class="btn btn-primary"
-              type="button"
-              id="button-addon2"
-            >
-              <i class="far fa-search"></i>
+            <input class="form-control" type="text" id="search-value" />
+            <button class="btn btn-primary" id="search-button">
+              <i class="fa fa-search"></i>
             </button>
           </div>
-          <!--Card with the list on the aside where the historic of the city put will be-->
           <div class="card">
-            <ul class="list-group list-group-flush list"></ul>
+            <ul class="list-group history list-group-flush list"></ul>
           </div>
-        </div>
-      </div>
-    </aside>
+        </aside>
 
+        <div class="col-lg-9">
+          <div id="chosenCity" class="mt-4"></div>
+        </div>
+        <div class="mt-4 col-md-12"></div>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
