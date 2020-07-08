@@ -68,3 +68,13 @@ cardBody.append(city, temperature, humidity, wind);
 card.append(cardBody);
 $("#currentCity").append(card)
 }
+
+function getCurrentForecast () {
+  
+    $.ajax({
+      url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey,
+      method: "GET"
+    }).then(function (response){
+  
+      console.log(response)
+      $('#forecast').empty();
