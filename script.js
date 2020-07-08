@@ -8,3 +8,6 @@ var date = new Date();
 
 //Value of the input from the user 
 city = $("searchValue").val();
+
+//Clear input box
+$("searchValue").val("");
