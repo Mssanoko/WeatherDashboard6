@@ -11,3 +11,6 @@ city = $("searchValue").val();
 
 //Clear input box
 $("searchValue").val("");
+
+//url for API 
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
