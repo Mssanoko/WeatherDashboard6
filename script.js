@@ -20,3 +20,7 @@ $.ajax({
     url: queryURL,
     method: "GET"
 })
+//when you get a response, run this callback 
+.then(function(response){
+    console.log(response)
+})
