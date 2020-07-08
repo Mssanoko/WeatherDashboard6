@@ -12,12 +12,23 @@
     />
   </head>
   <body>
-    <div class="bg-dark pb-2">
+    <header class="bg-dark pb-2">
       <div class="container">
         <h1 class="text-center text-white">Weather Dashboard</h1>
       </div>
-    </div>
+    </header>
 
+    <aside class="container-fluid"> 
+        <div class="row">
+            <div class="col-lg-3 bg-light pt-3 pb-3">
+                <h5>Search for a city: </h5>
+                <div class="input-group mb-3"> 
+                    <input id="searchTerm" type="text" class="form-control" placeholder="City name..." class="input-group-append">
+                    <button id="searchBtn" class="btn btn-primary" type="button" id="button-addon2"><i class="far fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+            
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
