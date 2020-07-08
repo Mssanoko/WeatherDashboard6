@@ -40,6 +40,18 @@ getCurrentConditions(response);
 getCurrentForecast(response);
 makeList();
 
+function makeList() {
+    var listItem = $("<li>").addClass("list-group-item").text(city);
+    $(".list").append(listItem);
+  }
+  function getCurrentConditions (response) {
+
+// get the temperature and convert to fahrenheit 
+let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+tempF = Math.floor(tempF);
+
+$('#chosenCity').empty();
+
 // get and set the content 
 const card = $("<div>").addClass("card");
 const cardBody = $("<div>").addClass("card-body");
