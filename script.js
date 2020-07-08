@@ -6,6 +6,14 @@ const apiKey = "&appid=e5d49d791f7868e4c7703b8e068cc7f8";
 
 var date = new Date();
 
+$("#searchValue").keypress(function(event) { 
+	
+	if (event.keyCode === 13) { 
+		event.preventDefault();
+		$("#searchBtn").click(); 
+	} 
+});
+
 //Value of the input from the user 
 city = $("searchValue").val();
 
