@@ -3,7 +3,7 @@ let city = $("#searchvalue").val();
 // store api key
 const apiKey = "&appid=e5d49d791f7868e4c7703b8e068cc7f8";
 
-let date = new Date();
+var date = new Date();
 
 $("#searchValue").keypress(function(event) { 
 	
@@ -17,13 +17,13 @@ $("#searchBtn").on("click", function() {
 
   $('#forecastDay').addClass('show');
 
-  // get the value of the input from user
+  // get the value from user
   city = $("#searchValue").val();
   
   // clear input box
   $("#searchValue").val("");  
 
-  // full url to call api
+  // url to call api
   const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
 
   $.ajax({
@@ -44,6 +44,8 @@ $("#searchBtn").on("click", function() {
 
     console.log(response.wind.speed)
 
+    console.log(response.value)
+
     getCurrentConditions(response);
     getCurrentForecast(response);
     makeList();
@@ -59,12 +61,12 @@ $("#searchBtn").on("click", function() {
   function getCurrentConditions (response) {
 
     // get the temperature and convert to fahrenheit 
-    let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+    var tempF = (response.main.temp - 273.15) * 1.80 + 32;
     tempF = Math.floor(tempF);
 
     $('#chosenCity').empty();
 
-    // get and set the content 
+    // set the content 
     const card = $("<div>").addClass("card");
     const cardBody = $("<div>").addClass("card-body");
     const city = $("<h4>").addClass("card-title").text(response.name);
@@ -72,7 +74,35 @@ $("#searchBtn").on("click", function() {
     const temperature = $("<p>").addClass("card-text current-temp").text("Temperature: " + tempF + " °F");
     const humidity = $("<p>").addClass("card-text current-humidity").text("Humidity: " + response.main.humidity + "%");
     const wind = $("<p>").addClass("card-text current-wind").text("Wind Speed: " + response.wind.speed + " MPH");
-    const image = $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png")
+    const image = $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png");
+  
+
+      //get UV Index
+      var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=4cf30da31449bce012676ddeb2829c74&units=imperial&lat=" + response.coord.lat + "&lon=" + response.coord.lat;
+      $.ajax({
+          url: uvURL,
+          method: "GET"
+      })
+      .then(function (uvresponse) {
+          var uvIndex = uvresponse.value;
+          var bgColor;
+          if (uvIndex <= 3) {
+              bgColor = "green";
+          }
+          else if ((uvIndex >=4) && (uvIndex <= 8)) {
+              bgColor = "yellow";
+          }
+         
+          else 
+              bgColor = "red";
+          
+        var uvdisp = $("<p>").attr("class", "card-text").text("UV Index: ");
+        uvdisp.append($("<span>").attr("class", "uvindex").attr("style", ("background-color:" + bgColor)).text(uvIndex));
+        cardBody.append(uvdisp);
+
+    });
+      
+
 
     // add to page
     city.append(cityDate, image)
@@ -93,13 +123,11 @@ function getCurrentForecast () {
     console.log(response.dt)
     $('#forecast').empty();
 
-    // variable to hold response.list
+    // hold response.list
     var results = response.list;
     console.log(results)
     
-    //declare start date to check against
-    // startDate = 20
-    //have end date, endDate = startDate + 5
+    // for loop for declare the date and end it.
 
     for (let i = 0; i < results.length; i++) {
 
@@ -110,7 +138,7 @@ function getCurrentForecast () {
 
       if(results[i].dt_txt.indexOf("12:00:00") !== -1){
         
-        // get the temperature and convert to fahrenheit 
+        // temperature convert to fahrenheit 
         var temp = (results[i].main.temp - 273.15) * 1.80 + 32;
         var tempF = Math.floor(temp);
 
